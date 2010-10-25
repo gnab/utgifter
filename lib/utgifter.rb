@@ -1,0 +1,1 @@
+require 'utgifter/session'
