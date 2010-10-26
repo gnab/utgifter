@@ -17,8 +17,8 @@ module Utgifter
       return false if logged_in_to_page?(page)
 
       form = page.form_with(:action => '/')
-      form['username'] = email
-      form['password'] = password
+      form.username = email
+      form.password = password
 
       page = form.submit(form.buttons[0])
       logged_in_to_page?(page)

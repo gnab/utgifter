@@ -14,8 +14,8 @@ describe Utgifter::Session do
     buttons.should_receive('[]').with(0).and_return(submit_button)
 
     form = mock('form')
-    form.should_receive('[]=').with('username', 'username')
-    form.should_receive('[]=').with('password', 'password')
+    form.should_receive('username=').with('username')
+    form.should_receive('password=').with('password')
     form.should_receive(:buttons).and_return(buttons)
     form.should_receive(:submit).with(submit_button)
 
