@@ -14,12 +14,13 @@ module Utgifter
     def self.all(session)
       page = session.agent.get(GROUP_URL)
 
-      group_dropdown = page
+      page
 	.form_with(:action => '/expenses/change_group/')
 	.field_with(:name => '__GroupSelector_ChangeGroup')
-	.options.collect { |option|
+	.options
+	.collect do |option|
 	  Group.new(session, option.value.to_i, option.text.strip)
-	}
+	end
     end
 
     def ==(other)
