@@ -1,10 +1,12 @@
 require 'rubygems'
 require 'mechanize'
 
-module Utgifter
-  BASE_URL = 'http://utgifter.no'
+require 'utgifter/group'
 
+module Utgifter
   class Session
+    attr_reader :agent
+
     def initialize
       @agent = Mechanize.new
     end
@@ -34,6 +36,10 @@ module Utgifter
 
       page = logout_link(page).click
       !logged_in_to_page?(page)
+    end
+
+    def groups
+      Group.all(self)
     end
 
     private
