@@ -2,8 +2,10 @@ require 'rubygems'
 require 'mechanize'
 
 module Utgifter
+  GROUPS_URL = BASE_URL + '/user/group/list/'
+
   class Group
-    attr_reader :id, :name
+    attr_reader :session, :id, :name
 
     def initialize(session, id, name)
       @session = session
@@ -12,7 +14,7 @@ module Utgifter
     end
 
     def self.all(session)
-      page = session.agent.get(GROUP_URL)
+      page = session.agent.get(GROUPS_URL)
 
       page
 	.form_with(:action => '/expenses/change_group/')
@@ -21,6 +23,10 @@ module Utgifter
 	.collect do |option|
 	  Group.new(session, option.value.to_i, option.text.strip)
 	end
+    end
+
+    def members
+      User.all(self)
     end
 
     def ==(other)

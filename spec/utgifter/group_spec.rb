@@ -22,8 +22,8 @@ describe Utgifter::Group do
       .with(:action => '/expenses/change_group/')
       .and_return(form)
 
-    @agent.should_receive(:get).with(Utgifter::GROUP_URL).
-      and_return(page)
+    @agent.should_receive(:get).with(Utgifter::GROUPS_URL)
+      .and_return(page)
 
     Utgifter::Group.all(@session).should == [
       Utgifter::Group.new(@session, 17, 'group a'),

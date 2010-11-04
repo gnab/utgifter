@@ -1,9 +1,9 @@
 require 'rubygems'
 require 'mechanize'
 
-require 'utgifter/group'
-
 module Utgifter
+  BASE_URL = 'http://utgifter.no'
+
   class Session
     attr_reader :agent
 
